@@ -4,4 +4,4 @@ from core.models import (
 )
 
 # Register your models here.
-admin.register(Movie)
+admin.site.register(Movie)
