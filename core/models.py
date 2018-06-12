@@ -33,6 +33,12 @@ class Movie(models.Model):
         related_name='writing_credits',
         blank=True
     )
+    actors = models.ManyToManyField(
+        to='Person',
+        through='Role',
+        related_name='acting_credits',
+        blank=True
+    )
 
     # Meta class attributes
     class Meta:
