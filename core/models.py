@@ -55,6 +55,18 @@ class Movie(models.Model):
         )
 
 
+class Role(models.Model):
+    movie = models.ForeignKey(to='Movie', on_delete=models.DO_NOTHING)
+    person = models.ForeignKey(to='Person', on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=140)
+
+    class Meta:
+        unique_together = (
+            'movie',
+            'person',
+            'name',
+        )
+
 
 
 class Person(models.Model):
