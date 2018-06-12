@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Movie(models.Model):
 
     # Choices
@@ -55,20 +56,6 @@ class Movie(models.Model):
         )
 
 
-class Role(models.Model):
-    movie = models.ForeignKey(to='Movie', on_delete=models.DO_NOTHING)
-    person = models.ForeignKey(to='Person', on_delete=models.DO_NOTHING)
-    name = models.CharField(max_length=140)
-
-    class Meta:
-        unique_together = (
-            'movie',
-            'person',
-            'name',
-        )
-
-
-
 class Person(models.Model):
 
     # Model fields
@@ -99,3 +86,23 @@ class Person(models.Model):
                 self.first_name,
                 self.born,
             )
+
+
+class Role(models.Model):
+    movie = models.ForeignKey(to='Movie', on_delete=models.DO_NOTHING)
+    person = models.ForeignKey(to='Person', on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=140)
+
+    class Meta:
+        unique_together = (
+            'movie',
+            'person',
+            'name',
+        )
+
+    def __str__(self):
+        return "{} {} {}".format(
+            self.movie_id,
+            self.person_id,
+            self.name
+        )
