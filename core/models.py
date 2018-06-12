@@ -23,3 +23,9 @@ class Movie(models.Model):
             self.title,
             self.year
         )
+
+    class Meta:
+        ordering = (
+            '-year',
+            'title',
+        )
