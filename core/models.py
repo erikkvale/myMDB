@@ -17,6 +17,13 @@ class Movie(models.Model):
     rating = models.IntegerField(choices=RATINGS, default=NOT_RATED)
     runtime = models.PositiveIntegerField()
     website = models.URLField(blank=True)
+    director = models.ForeignKey(
+        to='Person',
+        on_delete=models.SET_NULL,
+        related_name='directed',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         ordering = (
