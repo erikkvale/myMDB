@@ -1,6 +1,8 @@
 from django.db import models
 
 class Movie(models.Model):
+
+    # Choices
     NOT_RATED = 0
     RATED_G = 1
     RATED_PG = 2
@@ -11,6 +13,8 @@ class Movie(models.Model):
         (RATED_PG, 'PG - Parental Guidance'),
         (RATED_R, 'R - Restricted'),
     )
+
+    # Model fields
     title = models.CharField(max_length=140)
     plot = models.TextField()
     year = models.PositiveIntegerField()
@@ -24,13 +28,20 @@ class Movie(models.Model):
         null=True,
         blank=True
     )
+    writers = models.ManyToManyField(
+        to='Person',
+        related_name='writing_credits',
+        blank=True
+    )
 
+    # Meta class attributes
     class Meta:
         ordering = (
             '-year',
             'title',
         )
 
+    # Human friendly obj representation
     def __str__(self):
         return "{} ({})".format(
             self.title,
@@ -41,17 +52,21 @@ class Movie(models.Model):
 
 
 class Person(models.Model):
+
+    # Model fields
     first_name = models.CharField(max_length=140)
     last_name = models.CharField(max_length=140)
     born = models.DateField()
     died = models.DateField(null=True, blank=True)
 
+    # Meta class attributes
     class Meta:
         ordering = (
             'last_name',
             'first_name',
         )
 
+    # Human friendly obj representation
     def __str__(self):
         if self.died:
             return "{}, {} ({}-{})".format(
