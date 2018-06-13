@@ -2,6 +2,15 @@ from django.db import models
 
 
 # Custom Model Managers
+class MovieManager(models.Manager):
+
+    def all_with_related_persons(self):
+        qs = self.get_queryset()
+        qs = qs.select_related('director')
+        qs = qs.prefetch_related('writers', 'actors')
+        return qs
+
+
 class PersonManager(models.Manager):
 
     def all_with_prefetch_movies(self):
@@ -53,6 +62,9 @@ class Movie(models.Model):
         related_name='acting_credits',
         blank=True
     )
+
+    # Custom Manager class
+    objects = MovieManager()
 
     # Meta class attributes
     class Meta:
