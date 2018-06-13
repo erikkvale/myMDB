@@ -1,7 +1,10 @@
 from django.db import models
+from django.conf import settings
 
 
+#==========================================================
 # Custom Model Managers
+#==========================================================
 class MovieManager(models.Manager):
 
     def all_with_related_persons(self):
@@ -22,7 +25,9 @@ class PersonManager(models.Manager):
         )
 
 
+#==========================================================
 # Models
+#==========================================================
 class Movie(models.Model):
 
     # Choices
@@ -133,4 +138,22 @@ class Role(models.Model):
             self.movie_id,
             self.person_id,
             self.name
+        )
+
+
+class Vote(models.Model):
+    UP = 1
+    DOWN = -1
+    VALUE_CHOICES = (
+        (UP, "👍",),
+        (DOWN, "👎",),
+    )
+    value = models.SmallIntegerField(choices=VALUE_CHOICES)
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    movie = models.ForeignKey(to=Movie, on_delete=models.CASCADE)
+    voted_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = (
+            'user', 'movie'
         )
