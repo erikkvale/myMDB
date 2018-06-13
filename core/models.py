@@ -1,6 +1,19 @@
 from django.db import models
 
 
+# Custom Model Managers
+class PersonManager(models.Manager):
+
+    def all_with_prefetch_movies(self):
+        qs = self.get_queryset()
+        return qs.prefetch_related(
+            'directed',
+            'writing_credits',
+            'role_set__movie'
+        )
+
+
+# Models
 class Movie(models.Model):
 
     # Choices
@@ -63,6 +76,9 @@ class Person(models.Model):
     last_name = models.CharField(max_length=140)
     born = models.DateField()
     died = models.DateField(null=True, blank=True)
+
+    # Custom Manager class
+    objects = PersonManager()
 
     # Meta class attributes
     class Meta:
