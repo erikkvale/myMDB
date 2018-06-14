@@ -132,3 +132,6 @@ STATIC_URL = '/static/'
 
 # Login/Logout
 LOGIN_REDIRECT_URL = 'core:MovieList'
+
+# Set default login page
+LOGIN_URL = 'user:login'
