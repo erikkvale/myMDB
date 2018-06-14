@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import (
     ListView,
     DetailView,
+    CreateView
 )
 from core.models import Movie, Person, Vote
+from core.forms import VoteForm
 
 
 class MovieList(ListView):
@@ -45,3 +48,33 @@ class MovieDetail(DetailView):
 
 class PersonDetail(DetailView):
     queryset = Person.objects.all_with_prefetch_movies()
+
+
+
+class CreateVote(LoginRequiredMixin, CreateView):
+    form_class = VoteForm
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['user'] = self.request.user.id
+        initial['movie'] = self.kwargs['movie_id']
+        return initial
+
+    def get_success_url(self):
+        movie_id = self.object.movie.id
+        return reverse(
+            'core:MovieDetail',
+            kwargs={
+                'pk': movie_id
+            }
+        )
+
+    def render_to_response(self, context, **response_kwargs):
+        movie_id = context['object'].id
+        movie_detail_url = reverse(
+            'core:MovieDetail',
+            kwargs={
+                'pk': movie_id
+            }
+        )
+        return redirect(to=movie_detail_url)
