@@ -8,7 +8,10 @@ from core.views import MovieList
 
 
 class TestMovieListPagination(TestCase):
-    ACTIVE_PAGINATION_HTML = """    <li class="page-item active">      <a href="{}?page={}" class="page-link">{}</a>    </li>    """
+    ACTIVE_PAGINATION_HTML = """    
+        <li class="page-item active">
+        <a href="{}?page={}" class="page-link">{}</a></li>    
+    """
     def setUp(self):
         for n in range(150):
             Movie.objects.create(
