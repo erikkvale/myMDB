@@ -156,17 +156,24 @@ class Role(models.Model):
 
 
 class Vote(models.Model):
+    # Constants
     UP = 1
     DOWN = -1
     VALUE_CHOICES = (
         (UP, "👍",),
         (DOWN, "👎",),
     )
+
+    # Model fields
     value = models.SmallIntegerField(choices=VALUE_CHOICES)
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(to=Movie, on_delete=models.CASCADE)
     voted_on = models.DateTimeField(auto_now=True)
 
+    # Custom Manager class
+    objects = VoteManager()
+
+    # Meta class attributes
     class Meta:
         unique_together = (
             'user', 'movie'
