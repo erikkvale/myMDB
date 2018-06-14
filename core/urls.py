@@ -14,4 +14,14 @@ urlpatterns = [
         views.MovieDetail.as_view(),
         name='MovieDetail'
     ),
+    path(
+        'movie/<int:movie_id>/vote',
+        views.CreateView.as_view(),
+        name='CreateVote'
+    ),
+    path(
+        'movie/<int:movie_id>/vote/<int:pk>',
+        views.UpdateView.as_view(),
+        name='UpdateVote'
+    ),
 ]
