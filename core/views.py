@@ -81,7 +81,6 @@ class CreateVote(LoginRequiredMixin, CreateView):
         return redirect(to=movie_detail_url)
 
 
-
 class UpdateVote(LoginRequiredMixin, UpdateView):
     form_class = VoteForm
     queryset = Vote.objects.all()
