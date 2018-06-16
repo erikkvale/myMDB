@@ -29,4 +29,9 @@ urlpatterns = [
         views.MovieImageUpload.as_view(),
         name='MovieImageUpload'
     ),
+    path(
+        'move/top',
+        views.TopMovies.as_view(),
+        name="TopMovies"
+    ),
 ]
