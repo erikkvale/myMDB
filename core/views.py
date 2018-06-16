@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
 )
 from core.models import Movie, Person, Vote
-from core.forms import VoteForm
+from core.forms import VoteForm, MovieImageForm
 
 
 class MovieList(ListView):
@@ -20,8 +20,15 @@ class MovieList(ListView):
 class MovieDetail(DetailView):
     queryset = Movie.objects.all_with_related_persons_and_score()
 
+    # Helper function for movie image form
+    def movie_image_form(self):
+        if self.request.user.is_authenticated:
+            return MovieImageForm()
+        return None
+    
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx['image_form'] = self.movie_image_form()
         if self.request.user.is_authenticated:
             vote = Vote.objects.get_vote_or_unsaved_blank_vote(
                 movie=self.object,
