@@ -17,6 +17,11 @@ class MovieList(ListView):
     paginate_by = 10
 
 
+class TopMovies(ListView):
+    template_name = 'core/top_movies_list.html'
+    queryset = Movie.objects.get_top_ten(limit=10)
+
+
 class MovieDetail(DetailView):
     queryset = Movie.objects.all_with_related_persons_and_score()
 
