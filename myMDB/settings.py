@@ -135,3 +135,7 @@ LOGIN_REDIRECT_URL = 'core:MovieList'
 
 # Set default login page
 LOGIN_URL = 'user:login'
+
+# Media settings
+MEDIA_URL = '/uploaded/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media_root')
