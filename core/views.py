@@ -25,7 +25,7 @@ class MovieDetail(DetailView):
         if self.request.user.is_authenticated:
             return MovieImageForm()
         return None
-    
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['image_form'] = self.movie_image_form()
