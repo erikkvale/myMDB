@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.aggregates import Sum
+from uuid import uuid4
 
 
 #==========================================================
@@ -49,6 +50,12 @@ class VoteManager(models.Manager):
 #==========================================================
 # Models
 #==========================================================
+
+# Helper function(s)
+def movie_directory_path_with_uuid(instance, file_name):
+    return "{}/{}".format(instance.movie_id, uuid4())
+
+
 class Movie(models.Model):
 
     # Choices
@@ -105,6 +112,21 @@ class Movie(models.Model):
             self.title,
             self.year
         )
+
+
+class MovieImage(models.Model):
+    image = models.ImageField(
+        upload_to=movie_directory_path_with_uuid
+    )
+    uploaded = models.DateTimeField(auto_now=True)
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
 
 
 class Person(models.Model):
