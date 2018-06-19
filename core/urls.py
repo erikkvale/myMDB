@@ -1,37 +1,44 @@
 from django.urls import path
-from . import views
+from .views import (
+    MovieList,
+    MovieDetail,
+    CreateVote,
+    UpdateVote,
+    MovieImageUpload,
+    TopMovies
+)
 
 app_name = 'core'
 
 urlpatterns = [
     path(
         'movies',
-        views.MovieList.as_view(),
+        MovieList.as_view(),
         name='MovieList'
     ),
     path(
         'movie/<int:pk>',
-        views.MovieDetail.as_view(),
+        MovieDetail.as_view(),
         name='MovieDetail'
     ),
     path(
         'movie/<int:movie_id>/vote',
-        views.CreateVote.as_view(),
+        CreateVote.as_view(),
         name='CreateVote'
     ),
     path(
         'movie/<int:movie_id>/vote/<int:pk>',
-        views.UpdateVote.as_view(),
+        UpdateVote.as_view(),
         name='UpdateVote'
     ),
     path(
         'movie/<int:movie_id>/image/upload',
-        views.MovieImageUpload.as_view(),
+        MovieImageUpload.as_view(),
         name='MovieImageUpload'
     ),
     path(
         'movie/top',
-        views.TopMovies.as_view(),
+        TopMovies.as_view(),
         name="TopMovies"
     ),
 ]
