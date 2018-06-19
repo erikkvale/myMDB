@@ -25,6 +25,8 @@ SECRET_KEY = '6^gczeg+c%!b0b8o_e^fpfb$0e5_o=4i)law+7kxclix69d+a6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CSRF_USE_SESSIONS = True
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
