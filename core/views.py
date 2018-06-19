@@ -10,9 +10,19 @@ from django.views.generic import (
 )
 from core.models import Movie, Person, Vote
 from core.forms import VoteForm, MovieImageForm
+from core.mixins import CachePageVaryOnCookieMixin
 
 
-class MovieList(ListView):
+class MovieList(ListView, CachePageVaryOnCookieMixin):
+    """
+    Now when MovieList gets a request routed to it,
+    cache_page will check whether it has already been cached.
+    If it has been cached, Django will return the cached
+    response without doing any more work. If it hasn't been
+    cached, our regular MovieList view will create a new response.
+    The new response will have a VARY cookie header added and
+    then get cached.
+    """
     model = Movie
     paginate_by = 10
 
