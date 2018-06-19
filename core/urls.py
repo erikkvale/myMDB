@@ -16,12 +16,12 @@ urlpatterns = [
     ),
     path(
         'movie/<int:movie_id>/vote',
-        views.CreateView.as_view(),
+        views.CreateVote.as_view(),
         name='CreateVote'
     ),
     path(
         'movie/<int:movie_id>/vote/<int:pk>',
-        views.UpdateView.as_view(),
+        views.UpdateVote.as_view(),
         name='UpdateVote'
     ),
     path(
