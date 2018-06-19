@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
 INTERNAL_IPS = '127.0.0.1'
 
 # Application definition
-
 INSTALLED_APPS = [
     'core',
     'user',
@@ -142,3 +141,13 @@ LOGIN_URL = 'user:login'
 # Media settings
 MEDIA_URL = '/uploaded/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media_root')
+
+
+# Caching (development)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-locmemcache',
+        'TIMEOUT': 5,
+    }
+}
