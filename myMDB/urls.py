@@ -32,3 +32,9 @@ urlpatterns = [
     path('', include('core.urls', namespace='core')),
     path('user/', include('user.urls', namespace='user')),
 ] + MEDIA_FILE_PATHS
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('debug/', include(debug_toolbar.urls)),
+    ] + urlpatterns
