@@ -30,7 +30,7 @@ urlpatterns = [
         name='MovieImageUpload'
     ),
     path(
-        'move/top',
+        'movie/top',
         views.TopMovies.as_view(),
         name="TopMovies"
     ),
