@@ -21,3 +21,11 @@ DATABASES['default'].update(
         'PORT': os.getenv('DJANGO_DB_PORT'),
     }
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-locmemcache',
+        'TIMEOUT': int(os.getenv('DJANGO_CACHE_TIMEOUT'),)
+    }
+}
