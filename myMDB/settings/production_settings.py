@@ -1,6 +1,8 @@
 from django.core.exceptions import ImproperlyConfigured
 from .base_settings import *
 
+
+
 DEBUG = False
 
 if SECRET_KEY is None:
