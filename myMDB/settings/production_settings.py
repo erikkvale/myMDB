@@ -11,3 +11,13 @@ if SECRET_KEY is None:
 ALLOWED_HOSTS += [
     os.getenv('DJANGO_ALLOWED_HOSTS'),
 ]
+
+DATABASES['default'].update(
+    {
+        'NAME': os.getenv('DJANGO_DB_NAME'),
+        'USER': os.getenv('DJANGO_DB_USER'),
+        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD'),
+        'HOST': os.getenv('DJANGO_DB_HOST'),
+        'PORT': os.getenv('DJANGO_DB_PORT'),
+    }
+)
