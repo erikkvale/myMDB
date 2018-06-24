@@ -16,3 +16,10 @@ RUN bash /mymdb/scripts/pip_install.sh /mymdb
 
 # Static files collection
 RUN bash /mymdb/scripts/collect_static.sh /mymdb
+
+# Nginx
+COPY nginx/mymdb.conf /etc/nginx/sites-available/mymdb.conf
+RUN rm /etc/nginx/sites-enabled/*
+RUN ln -s /etc/nginx/sites-available/mymdb.conf /etc/nginx/sites-enabled/mymdb.conf
+COPY runit/nginx /etc/service/nginx
+RUN chmod +x /etc/service/nginx/run
