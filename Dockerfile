@@ -13,3 +13,6 @@ RUN apt-get install -y nginx postgresql-client python3 python3-pip
 RUN pip3 install virtualenv
 RUN virtualenv /mymdb/venv
 RUN bash /mymdb/scripts/pip_install.sh /mymdb
+
+# Static files collection
+RUN bash /mymdb/scripts/collect_static.sh /mymdb
