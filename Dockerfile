@@ -32,3 +32,7 @@ RUN chown www-data /var/log/uwsgi/mymdb.log
 RUN chown www-data /var/log/mymdb/mymdb.log
 COPY runit/uwsgi /etc/service/uwsgi
 RUN chmod +x /etc/service/uwsgi/run
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 80
