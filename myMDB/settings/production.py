@@ -1,5 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
-from .base_settings import *
+from .base import *
 
 DEBUG = False
 
